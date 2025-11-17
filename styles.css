@@ -321,7 +321,7 @@ body {
 
 /* Exam-critical styling - removed background, only badge matters */
 .exam-critical {
-    /* Clean - no background needed, the ⚡ badge is enough */
+    position: relative; /* Clean - no background needed, the ⚡ badge is enough */
 }
 
 .block-concept {
@@ -825,7 +825,9 @@ mark-key, .mark-key {
 
 @media print {
     /* Hide UI elements only */
-    .top-bar {
+    .top-bar,
+    .legend-btn,
+    .legend-modal {
         display: none !important;
     }
     
@@ -836,27 +838,29 @@ mark-key, .mark-key {
         padding: 0;
     }
     
-    /* Optimize paper sheet for printing - keep the paper look */
+    /* Optimize paper sheet for printing - match screen exactly */
     .paper-sheet {
         box-shadow: none;
         margin: 0;
-        padding: 40px 40px 40px calc(var(--hole-width) + var(--margin-width) + 20px);
+        padding: 0 50px 60px calc(var(--hole-width) + var(--margin-width) + 20px);
+        padding-top: calc(var(--line-height) * 1.5);
         width: 100%;
         max-width: 100%;
         background: white;
-        /* Keep ruled lines for authentic paper look */
+        /* Keep ruled lines matching screen */
         background-image: 
             repeating-linear-gradient(
                 0deg,
                 transparent,
                 transparent calc(var(--line-height) - 1px),
-                #e8e8e8 calc(var(--line-height) - 1px),
-                #e8e8e8 var(--line-height)
+                #e3ddd4 calc(var(--line-height) - 1px),
+                #e3ddd4 var(--line-height)
             );
+        background-position: 0 0;
         page-break-after: avoid;
     }
     
-    /* Keep holes visible for paper aesthetic */
+    /* Keep holes visible */
     .holes {
         display: flex;
         print-color-adjust: exact;
@@ -876,63 +880,58 @@ mark-key, .mark-key {
     
     /* Ensure content is readable */
     .note-content {
-        color: #000;
+        color: #1a1410;
     }
     
-    /* Preserve all highlighting colors */
+    /* Preserve simplified highlighting - match screen exactly */
     mark-critical,
-    .mark-critical {
-        background: linear-gradient(180deg, transparent 60%, #fee2e2 60%);
-        color: #991b1b;
-        font-weight: 600;
-        print-color-adjust: exact;
-        -webkit-print-color-adjust: exact;
-    }
-    
+    .mark-critical,
     mark-key,
     .mark-key {
-        background: linear-gradient(180deg, transparent 60%, #fef3c7 60%);
-        color: #92400e;
-        font-weight: 500;
-        print-color-adjust: exact;
-        -webkit-print-color-adjust: exact;
-    }
-    
-    .key-sentence {
-        background: linear-gradient(180deg, transparent 65%, rgba(212, 165, 116, 0.25) 65%);
+        background: linear-gradient(180deg, transparent 65%, rgba(255, 244, 214, 0.8) 65%);
         color: inherit;
         font-weight: 500;
         print-color-adjust: exact;
         -webkit-print-color-adjust: exact;
     }
     
-    /* Preserve block styling */
+    .key-sentence {
+        --mark-color: #fff4d6;
+        --mark-skew: 0.25em;
+        --mark-height: 1em;
+        --mark-overlap: 0.3em;
+        margin-inline: calc(var(--mark-overlap) * -1);
+        padding-inline: var(--mark-overlap);
+        background-color: transparent;
+        background-image:
+            linear-gradient(to bottom right, transparent 50%, var(--mark-color) 50%),
+            linear-gradient(var(--mark-color), var(--mark-color)),
+            linear-gradient(to top left, transparent 50%, var(--mark-color) 50%);
+        background-size:
+            var(--mark-skew) var(--mark-height),
+            calc(100% - var(--mark-skew) * 2 + 1px) var(--mark-height),
+            var(--mark-skew) var(--mark-height);
+        background-position: left center, center, right center;
+        background-repeat: no-repeat;
+        color: inherit;
+        font-weight: 500;
+        -webkit-box-decoration-break: clone;
+        box-decoration-break: clone;
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+    }
+    
+    /* No background for exam-critical - match screen */
     .exam-critical {
-        background: rgba(254, 243, 199, 0.15);
-        print-color-adjust: exact;
-        -webkit-print-color-adjust: exact;
-    }
-    
-    .example-block {
-        background: rgba(0, 0, 0, 0.02);
-        border-left: 3px solid #e3ddd4;
-        page-break-inside: avoid;
-        print-color-adjust: exact;
-        -webkit-print-color-adjust: exact;
-    }
-    
-    .formula-block {
-        background: #fef9e7;
-        border-left: 4px solid #d4a574;
-        page-break-inside: avoid;
-        print-color-adjust: exact;
-        -webkit-print-color-adjust: exact;
+        position: relative; /* Clean - no background */
     }
     
     /* Keep sections together */
     .section-block,
     .concept-block,
-    .list-block {
+    .list-block,
+    .formula-block,
+    .example-block {
         page-break-inside: avoid;
     }
     
@@ -945,6 +944,19 @@ mark-key, .mark-key {
     
     /* Preserve exam badge */
     .exam-badge {
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+    }
+    
+    /* Preserve path badge and topic heading */
+    .path-badge {
+        color: #9ca3af;
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+    }
+    
+    .topic-heading {
+        color: #1a1410;
         print-color-adjust: exact;
         -webkit-print-color-adjust: exact;
     }
@@ -980,6 +992,11 @@ mark-key, .mark-key {
         color: #78350f;
         print-color-adjust: exact;
         -webkit-print-color-adjust: exact;
+    }
+    
+    /* Ensure all text uses proper line height */
+    p, li, div {
+        line-height: var(--line-height);
     }
 }
 
