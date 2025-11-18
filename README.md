@@ -2,6 +2,34 @@
 
 A beautiful, paper-inspired study notes viewer for Thathsarani.
 
+## 🤖 For AI Agents
+
+**Start every chat session by reading these context files:**
+
+1. **`PROJECT_CONTEXT.md`** - Comprehensive project documentation (architecture, data structures, features)
+2. **`QUICK_REFERENCE.md`** - Quick reference for common tasks and debugging
+
+These files use proven context engineering techniques to help you understand and work with this project seamlessly.
+
+```
+Load context files → Understand project structure → Execute user requests
+```
+
+### 📚 Complete Context Documentation
+
+This project includes a comprehensive context documentation system:
+
+| File | Purpose | When to Use |
+|------|---------|-------------|
+| 📇 `CONTEXT_INDEX.md` | Master navigation guide | Finding the right doc |
+| 📘 `PROJECT_CONTEXT.md` | Full project documentation | Every fresh chat (essential) |
+| ⚡ `QUICK_REFERENCE.md` | Commands & quick tasks | Task execution (essential) |
+| 🎯 `FRESH_CHAT_PROMPT.md` | Ready-to-use prompts | Starting new chats |
+| 📖 `HOW_TO_USE_CONTEXT.md` | Usage instructions | First time / training |
+| 🧪 `CONTEXT_ENGINEERING.md` | Methodology explained | Understanding approach |
+
+**Quick Start**: Use the prompt template from `FRESH_CHAT_PROMPT.md` in every new chat session!
+
 ## How to Run
 
 You need to run a local web server because browsers block file:// protocol requests.
